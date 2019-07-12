@@ -1,0 +1,15 @@
+﻿@*@model int*@
+@{
+    ViewData["Title"] = "Net Bank - Error!";
+}
+<h2>An Error Has Occured</h2>
+
+<h3>Account Not Found or Invalid Action on an Account</h3>
+
+<a href="javascript:void(0);" onclick="history.go(-1);">
+    <button class="btn btn-default">Previous</button>
+</a>
+<div>
+    <button class="btn btn-default">@Html.ActionLink("Sign Out", "Index", "Home")</button>
+</div>
+

@@ -1,0 +1,19 @@
+﻿@model int
+@{
+    ViewData["Title"] = "Net Bank Main Menu";
+}
+<h2>Net Bank</h2>
+<h3>How May We Help You Today?</h3>
+
+<div>
+    <button class="btn btn-default">@Html.ActionLink("View Accounts", "Index", "Accounts", new { userID = Model }) </button>
+</div><br />
+<div>
+    <button class="btn btn-default">@Html.ActionLink("Open New Account", "Create", "Accounts", new { userID = Model })</button>
+</div><br />
+@*<div>
+    <button class="btn btn-default">@Html.ActionLink("Update Personal Info", "Edit", "Customers", new { userID = Model })</button>
+</div><br />*@
+<div>
+    <button class="btn btn-default">@Html.ActionLink("Sign Out", "Index", "Home")</button>
+</div>
