@@ -1,0 +1,71 @@
+﻿@model IEnumerable<NetBankDB.Models.Accounts>
+
+@{
+    ViewData["Title"] = "All Accounts Opened";
+}
+
+    <h2>All Accounts Currently Opened</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <span id="banking-options-title">Account</span>
+            </th>
+            <th>
+                <span id="banking-options-title">Account ID</span>
+            </th>
+            <th>
+                <span id="banking-options-title">Balance</span>
+            </th>
+            <th>
+                <span id="banking-options-title">Account Options</span>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @{ var userID = 0; 
+            foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.accountType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.accountID)
+                </td>
+                <td>
+                    $@Html.DisplayFor(modelItem => item.balance)
+                </td>
+                @if (item.accountType == "Checking" || item.accountType == "Business")
+                {
+                    userID = item.userID;
+                    <td>
+                        <a asp-action="Deposit" asp-route-id="@item.accountID">Deposit</a> |
+                        <a asp-action="Withdraw" asp-route-id="@item.accountID">Withdraw</a> |
+                        <a asp-action="Transfer" asp-route-id="@item.userID">Transfer</a> |
+                        <a asp-action="Transactions" asp-route-id="@item.accountID">Transactions</a> |
+                        <a asp-action="Delete" asp-route-id="@item.accountID">Close Account</a>
+                    </td>
+                }
+                @if (item.accountType == "Loan")
+                {
+            <td>
+                <a asp-action="PayLoan" asp-route-id="@item.accountID">Pay Loan Installment</a> |
+                <a asp-action="Transactions" asp-route-id="@item.accountID">Transactions</a> |
+                <span id="dueDate">Due on @item.dateInterest</span>
+            </td>
+                }
+                @if (item.accountType == "Term")
+                {
+                    <td>
+                        <span id="dueDate">Matures on @item.dateInterest</span>
+                    </td>
+                }
+
+            </tr>
+            }
+    <button class="btn btn-default">@Html.ActionLink("Main Menu", "MainMenu", "MainMenu", new { userID = userID })</button>
+    }
+</tbody>
+</table>

@@ -1,0 +1,36 @@
+﻿@model NetBankDB.Models.Accounts
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Accounts</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.accountType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.accountType)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.balance)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.balance)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.interest)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.interest)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.accountID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

@@ -1,0 +1,52 @@
+﻿@model NetBankDB.Models.Accounts
+
+@{
+    ViewBag.Title = "New Term Deposit Account";
+}
+
+<h2>Opening Your New Term Deposit Account...</h2>
+
+@using (Html.BeginForm("TermAccount", "Banking", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-md-4">
+            <p align="justify">
+                A Term Deposit Account allows you to put some cash away and watch it grow into something much bigger:
+            </p>
+        </div>
+    </div>
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <input asp-for="userID" hidden />
+        <input asp-for="dateCreated" hidden />
+        <input asp-for="accountType" hidden />
+
+        <label class="control-label">What Type of Account Would You Like to Open</label> <br />
+        <input type="radio" value="1" name="accountChoice" /> 4.5% for 1 Year <br />
+        <input type="radio" value="2" name="accountChoice" /> 17.5% for 5 Years <br />
+        <input type="radio" value="3" name="accountChoice" /> 25% for 10 Years <br />
+        <span class="text-danger"></span>
+        
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="balance" class="control-label">Deposit Amount</label>
+                    <input asp-for="balance" class="form-control" />
+                    <span asp-validation-for="balance" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-default" />
+            <button class="btn btn-default">@Html.ActionLink("Main Menu", "MainMenu", "MainMenu", new { userID = @Model.userID })</button>
+        </div>
+    </div>
+    }
+
+

@@ -1,0 +1,52 @@
+﻿@model NetBankDB.Models.Accounts
+
+@{
+    ViewBag.Title = "New Business Account";
+}
+
+<h2>Opening Your New Business Account...</h2>
+
+@using (Html.BeginForm("BusinessAccount", "Banking", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-md-4">
+            <p align="justify">
+                This type of account allows you to withdraw money beyond your current balance to allow your business to flourish.
+                This overdraft amount is treated as a loan where we offer several different interest rate options to meet your business needs
+            </p>
+        </div>
+    </div>
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <input asp-for="userID" hidden />
+        <input asp-for="dateCreated" hidden />
+        <input asp-for="accountType" hidden />
+
+        <label class="control-label">What Type of Business Account Would You Like to Open</label> <br />
+        <input type="radio" value="1" name="accountChoice" /> 5% Compounded Annually <br />
+        <input type="radio" value="2" name="accountChoice" /> 2.89% Compounded Semi-Annually <br />
+        <input type="radio" value="3" name="accountChoice" /> 1.5% Compounded Quarterly <br />
+        <span class="text-danger"></span>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="balance" class="control-label">Deposit Amount</label>
+                    <input asp-for="balance" class="form-control" />
+                    <span asp-validation-for="balance" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-default" />
+            <button class="btn btn-default">@Html.ActionLink("Main Menu", "MainMenu", "MainMenu", new { userID = @Model.userID })</button>
+        </div>
+    </div>
+}
+
+

@@ -1,0 +1,43 @@
+﻿@model NetBankDB.Models.Accounts
+
+@{
+    ViewBag.Title = "New Loan Account";
+}
+
+<h2>Opening Your New Loan Account...</h2>
+
+@using (Html.BeginForm("LoanAccount", "Banking", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-md-4">
+            <p align="justify">
+                We offer several Loan Account options, which allows you to take out even more money than a Business Account would.
+                Our loan packages are offered at competitive interest rates!
+            </p>
+        </div>
+    </div>
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <input asp-for="userID" hidden />
+        <input asp-for="dateCreated" hidden />
+        <input asp-for="accountType" hidden />
+
+        <label class="control-label">What Type of Loan Would You Like to Take Out</label> <br />
+        <input type="radio" value="1" name="accountChoice" /> $20000 with a 2.5% Annual Rate <br />
+        <input type="radio" value="2" name="accountChoice" /> $50000 with a 5.5% Annual Rate <br />
+        <input type="radio" value="3" name="accountChoice" /> $100000 with a 11% Annual Rate <br />
+        <span class="text-danger"></span>
+
+        <br />
+
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-default" />
+            <button class="btn btn-default">@Html.ActionLink("Main Menu", "MainMenu", "MainMenu", new { userID = @Model.userID })</button>
+        </div>
+    </div>
+}
+

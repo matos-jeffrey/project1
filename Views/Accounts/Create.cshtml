@@ -1,0 +1,86 @@
+﻿@model NetBankDB.Models.Accounts
+
+@{
+    ViewData["Title"] = "Net Bank - Open an Account";
+}
+
+<h2>Time to Open Your New Account!</h2>
+
+@using (Html.BeginForm("AccountChoice", "Banking", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-md-4">
+            <u><b><h4>Checking Account</h4></b></u>
+            <p align="justify">
+                Checking Account has a competitive quarter annual interest rate of 0.05%
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <u><b><h4>Business Account</h4></b></u>
+            <p align="justify">
+                Allows you to withdraw money beyond your current balance to allow your business to flourish.
+                This overdraft amount is treated as a loan where we offer several different interest rate options to meet your business needs
+                <ul>
+                    <li>5% Compounded Annually</li>
+                    <li>2.89% Compounded Semi-Annually</li>
+                    <li>1.5% Compounded Quarterly</li>
+                </ul>
+            </p>
+        </div>
+        <div class="col-md-4">
+            <u><b><h4>Loan Account</h4></b></u>
+            <p align="justify">
+                Speaking about loans we also offer Loan account options, which allows you to take out even more money than a Business Account would.
+                Our loan packages are offered at competitive interest rates!
+                <ul>
+                    <li>$20000 with a 2.5% Annual Rate</li>
+                    <li>$50000 with a 5.5% Annual Rate</li>
+                    <li>$100000 with a 11% Annual Rate</li>
+                </ul>
+            </p>
+        </div>
+
+        <div class="col-md-4">
+            <u><b><h4>Term Deposit Account</h4></b></u>
+            <p align="justify">
+                Lastly, we offer a Term Deposit Account, which allows you to put some cash away and watch it grow:
+                <ul>
+                    <li>4.5% for 1 Year</li>
+                    <li>17.5% for 5 Years</li>
+                    <li>25% for 10 Years</li>
+                </ul>
+            </p>
+        </div>
+    </div>
+
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            @*<form asp-action="Create">*@
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <input asp-for="userID" hidden />
+                <input asp-for="dateCreated" hidden />
+                <label class="control-label">Which account would you like to open?</label> <br />
+                <input type="radio" value="Checking" name="accountChoice" /> Checking Account <br />
+                <input type="radio" value="Business" name="accountChoice" /> Business Account <br />
+                <input type="radio" value="Loan" name="accountChoice" /> Loan Account <br />
+                <input type="radio" value="Term" name="accountChoice" /> Term Deposit Account <br />
+                <span class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+                <button class="btn btn-default">@Html.ActionLink("Main Menu", "MainMenu", "MainMenu", new { userID = @Model.userID })</button>
+            </div>
+            @*</form>*@
+        </div>
+    </div>
+}
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

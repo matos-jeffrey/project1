@@ -1,0 +1,44 @@
+﻿@model NetBankDB.Models.Accounts
+
+@{
+    ViewData["Title"] = "Loan Payment";
+}
+
+<h2>Paying into @Model.accountType Account - @Model.accountID</h2>
+<h4>You Currently Owe $@Model.balance</h4>
+
+<hr />
+@using (Html.BeginForm("PayLoan", "Accounts", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-md-4">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="accountID" />
+            <input type="hidden" asp-for="userID" />
+            <input type="hidden" asp-for="accountType" />
+            <input type="hidden" asp-for="interest" />
+            <input type="hidden" asp-for="dateCreated" />
+            <input type="hidden" asp-for="dateInterest" />
+            <input type="hidden" asp-for="imf" />
+            <input type="hidden" asp-for="balance" />
+
+            <div class="form-group">
+                <label class="control-label">How much would you like to pay?</label>
+                <input id="amount" name="amount" class="form-control" />
+                <span class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Pay" class="btn btn-default" />
+                <button class="btn btn-default"> @Html.ActionLink("Accounts", "Index", "Accounts", new { userID = @Model.userID })</button>
+            </div>
+
+        </div>
+    </div>
+}
+
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

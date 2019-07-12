@@ -1,0 +1,60 @@
+﻿@model NetBankDB.Models.Accounts
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<h4>Accounts</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="userID" class="control-label"></label>
+                <input asp-for="userID" class="form-control" />
+                <span asp-validation-for="userID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="dateCreated" class="control-label"></label>
+                <input asp-for="dateCreated" class="form-control" />
+                <span asp-validation-for="dateCreated" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="accountType" class="control-label"></label>
+                <input asp-for="accountType" class="form-control" />
+                <span asp-validation-for="accountType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="balance" class="control-label"></label>
+                <input asp-for="balance" class="form-control" />
+                <span asp-validation-for="balance" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="interest" class="control-label"></label>
+                <input asp-for="interest" class="form-control" />
+                <span asp-validation-for="interest" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="dateInterest" class="control-label"></label>
+                <input asp-for="dateInterest" class="form-control" />
+                <span asp-validation-for="dateInterest" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="imf" class="control-label"></label>
+                <input asp-for="imf" class="form-control" />
+                <span asp-validation-for="imf" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

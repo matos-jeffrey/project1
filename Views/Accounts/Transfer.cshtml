@@ -1,0 +1,57 @@
+﻿@model IEnumerable<NetBankDB.Models.Accounts>
+
+@{
+    ViewData["Title"] = "Transfer";
+}
+<h2>Transfer Between Your Accounts</h2>
+<hr />
+@using (Html.BeginForm("Transfer", "Accounts", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+@Html.AntiForgeryToken()
+<div class="row">
+    <div class="col-md-4">
+
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        
+        <div class="form-group">
+            <label class="control-label">How much would you like to transfer?</label>
+            <input id="amount" name="amount" class="form-control" />
+            <span class="text-danger"></span>
+        </div>
+        @{ var userID = 0;
+            <div class="form-group">
+                <label class="control-label">Which Account Would You Like to Transfer From: </label>
+                <select name="accountsFrom">
+                    @foreach (var item in Model)
+                    {
+                        @if (item.accountType == "Loan" || item.accountType == "Term") { continue; }
+                        userID = item.userID;
+                        <option value="@item.accountID" name="accountsFrom">@item.accountType (@item.accountID) - $@item.balance</option>
+                    }
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Which Account Would You Like to Transfer To: </label>
+                <select name="accountsTo">
+                    @foreach (var item in Model)
+                    {
+                        @if (item.accountType == "Loan" || item.accountType == "Term") { continue; }
+                        <option value="@item.accountID" name="accountsTo">@item.accountType (@item.accountID) - $@item.balance</option>
+                    }
+                </select>
+
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Transfer" class="btn btn-default" /> |
+                <button class="btn btn-default">@Html.ActionLink("Accounts", "Index", "Accounts", new { userID = userID })</button>
+            </div>
+        }
+    </div>
+</div>
+}
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
